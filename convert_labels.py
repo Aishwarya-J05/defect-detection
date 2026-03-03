@@ -42,6 +42,5 @@ def convert_xml_to_yolo(xml_folder, output_folder):
     print(f"Done converting {xml_folder} ✅")
 
 # Run
-# Run
 convert_xml_to_yolo('data/steel/annotations/train/annotations', 'data/steel/labels/train')
 convert_xml_to_yolo('data/steel/annotations/val/annotations', 'data/steel/labels/val')
