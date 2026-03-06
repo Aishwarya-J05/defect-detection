@@ -9,3 +9,5 @@ data/steel/annotations/
 data/steel/labels/
 temp_*
 output_annotated.jpg
+.ipynb_checkpoints
+*.ipynb
