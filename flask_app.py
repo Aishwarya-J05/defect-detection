@@ -4,11 +4,24 @@ from dotenv import load_dotenv
 from database.db import login_user, signup_user, save_report, get_user_reports, get_report_stats
 from detect import detect_defects
 from explain import explain_defect
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
 
+# app = Flask(__name__)
+# app.secret_key = "steelsense-secret-key-2024"
+
 app = Flask(__name__)
-app.secret_key = "steelsense-secret-key-2024"
+
+app.secret_key = os.getenv("SECRET_KEY", "steelsense-secret-key-2024")
+
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
+app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+
 
 def login_required(f):
     from functools import wraps
